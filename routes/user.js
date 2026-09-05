@@ -8,21 +8,27 @@ const userController = require("../controllers/users.js");
 
 
 //sign up form
-router.get("/signup" ,userController.renderSignupForm );
-
-
 // sign up
-router.post("/signup" , wrapAsync( userController.signUp));
+
+router
+  .route( "/signup" )
+  .get( userController.renderSignupForm )
+  .post( wrapAsync( userController.signUp));
+
 
 // login form
-router.get("/login" , userController.renderLoginForm);
-
-
 //login
-router.post("/login" ,  saveRedirectUrl , passport.authenticate( "local" ,
+
+router
+  .route( "/login" )
+  .get( userController.renderLoginForm)
+  .post(
+    saveRedirectUrl 
+    , passport.authenticate( "local" ,
      { failureRedirect : "/login" ,
          failureFlash : true}) ,
-       userController.login);
+       userController.login );
+
 
 
 router.get("/logout" , userController.logout);
