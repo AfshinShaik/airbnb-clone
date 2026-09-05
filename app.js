@@ -77,11 +77,7 @@ app.use( (req,res,next) => {
     next();
 });
 
-// All listings Index route
-app.get("/listings" , wrapAsync(async (req,res) => {
-   let allListings= await Listing.find({});
-   res.render("listings/index" , { allListings });
-}));
+
 
 // to add a demo user
 app.get("/demouser" , async (req,res) => {
