@@ -35,6 +35,17 @@ module.exports.saveListing = async (req,res) => {
     
     let newListing=new Listing(req.body.listing);
     newListing.owner = req.user._id;
+    
+    if(req.file){
+        console.log(req.file);
+        let url = req.file.path;
+    let filename = req.file.filename;
+    console.log(url);
+        newListing.image = { url , filename };
+
+    }else{
+        console.log("Cloudinary issue");
+    }
     await newListing.save();
     req.flash("success" , " New Listing Created");
     res.redirect("/listings");
@@ -49,17 +60,24 @@ module.exports.renderEditForm =  async (req,res) => {
             return res.redirect("/listings");
 
     }
-    res.render("listings/edit.ejs" ,{listing})
+    let originalImageUrl = listing.image.url;
+    originalImageUrl=originalImageUrl.replace("/upload" , "/upload/h_300,w_300,c_fill");
+    res.render("listings/edit.ejs" ,{listing , originalImageUrl})
 };
 
 module.exports.updateChanges = async (req,res) => {
     let {id} = req.params;
     
-    
-        await Listing.findByIdAndUpdate(id, req.body.listing , {new:true});
-    
-        req.flash("success" , "  Listing Updated");
-        res.redirect(`/listings/${id}`);
+    await Listing.findByIdAndUpdate(id, req.body.listing , {new:true});
+       
+    if( typeof req.file !== "undefined"){
+        let url = req.file.path;
+        let filename = req.file.filename;
+        Listing.image = { url , filename };
+        await Listing.save();
+    }
+    req.flash("success" , "  Listing Updated");
+    res.redirect(`/listings/${id}`);
 
     
 };

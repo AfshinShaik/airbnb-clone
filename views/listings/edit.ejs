@@ -5,7 +5,9 @@
     <div class="row mt-3">
         <div class="col-8 offset-2">
     <h3>MAKE CHANGES</h3>
-    <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation">
+    <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" 
+        novalidate class="needs-validation" 
+        enctype="multipart/form-data">
         <div >
             <label for=" title" class="form-label">Title</label>
             <input type="text" class="form-control" placeholder="Enter title name" name="listing[title]" required value="<%=listing.title%>">
@@ -19,6 +21,18 @@
         <div class="invalid-feedback">Please enter a short description</div>
 
     </div>
+    <br>
+    <div>
+    <label for="image" >Current image </label> <br>
+        <img src="<%=originalImageUrl %>" />
+
+   </div>
+   
+    <div>
+    <label for=" image" class="form-label">New image file</label>
+    <input type="file" name="listing[image]" class="form-control">
+
+   </div>
     <br>
     <div class="row" >
         <div class="col-md-4">

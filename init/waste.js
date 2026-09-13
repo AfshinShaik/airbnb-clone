@@ -26,3 +26,10 @@ app.use((err,req,res,next) => {
 app.listen(8080,(req,res) =>{
     console.log("listening");
 });
+
+
+
+//shaikafshin298_db_user
+//NTkJ3lZxQ4jODKLL
+
+//mongodb+srv://shaikafshin298_db_user:NTkJ3lZxQ4jODKLL@cluster0.syoqkrb.mongodb.net/?appName=Cluster0
