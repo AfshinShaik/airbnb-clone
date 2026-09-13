@@ -42,7 +42,9 @@ main().then(() => {
 })
 
 async function main(){
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(dbUrl , {
+        autoSelectFamily:false
+    });
 };
 
 app.set("view engine" , "ejs");
@@ -66,7 +68,7 @@ store.on("error" , () => {
 
 const sessionOptions =({
     store,
-    secret:process.env.SECRETgit,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized : true,
     proxy:true,

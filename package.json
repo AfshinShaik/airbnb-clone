@@ -1,5 +1,5 @@
 {
-  "engine": {
+  "engines": {
     "node": "24.18.0"
   },
   "name": "major-project",
@@ -7,6 +7,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
