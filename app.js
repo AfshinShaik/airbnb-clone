@@ -118,7 +118,9 @@ app.use("/listings" , listingsRouter );
 app.use("/listings/:id/reviews" , reviewsRouter );
 app.use("/" , usersRouter );
 
-
+app.get("/" , (req,res) => {
+     res.redirect("/listings");
+ });
 
 
 // app.get("/test/listing" ,async (req,res) => {
@@ -144,9 +146,7 @@ app.all( "*any" , (req,res,next) => {
      res.status(statusCode).render("listings/error.ejs" , { message });
  });
 
-// app.get("/" , (req,res) => {
-//     res.send("hi");
-// });
+
 
 
 app.listen(8080, () => {
